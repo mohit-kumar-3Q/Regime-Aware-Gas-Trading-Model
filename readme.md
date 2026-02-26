@@ -1,0 +1,168 @@
+Regime-Aware Gas Trading Model
+Overview
+
+This project develops a systematic, regime-based trading framework for Henry Hub Natural Gas futures.
+
+The model identifies structurally different market environments using:
+
+Volatility clustering
+
+Seasonality-adjusted storage surprises
+
+Forward return diagnostics
+
+Out-of-sample backtesting with transaction costs
+
+The objective is not prediction for its own sake —
+it is to determine whether fundamental stress regimes exhibit exploitable return asymmetry.
+
+Market Motivation
+
+Natural gas markets are highly regime-dependent.
+
+Periods of:
+
+Storage tightness
+
+Supply shocks
+
+Weather-driven demand spikes
+
+Elevated volatility
+
+often generate nonlinear price behavior.
+
+Rather than fitting a black-box ML model, this framework explicitly defines regimes based on:
+
+Volatility Stress
+
+Storage Surprise (relative to seasonal norms)
+
+This allows us to test whether structural stress environments produce persistent directional bias.
+
+Data Used
+
+Henry Hub Daily Futures Prices
+
+Used to compute log returns, rolling volatility, and forward returns.
+
+EIA Weekly Natural Gas Storage Data
+
+Used to construct a seasonality-adjusted storage anomaly signal.
+
+All signals are built strictly from information available at the time.
+
+Methodology
+1. Storage Anomaly Construction
+
+Weekly storage change is calculated.
+
+Seasonal average weekly change is computed using ISO week grouping.
+
+Storage anomaly = Actual weekly change − Seasonal average.
+
+This isolates unexpected tightness or looseness in supply.
+
+2. Feature Engineering
+
+Daily log returns
+
+20-day rolling volatility
+
+5-day forward return (evaluation only)
+
+5-day momentum (diagnostic feature)
+
+3. Regime Definition
+
+Thresholds:
+
+Volatility Stress = 75th percentile of rolling volatility
+
+Tight Storage = 25th percentile of storage anomaly
+
+Loose Storage = 75th percentile of storage anomaly
+
+Regimes:
+
+Bullish Stress (Regime = 1)
+High volatility + negative storage anomaly (unexpected tightness)
+
+Bearish Stress (Regime = -1)
+High volatility + positive storage anomaly (unexpected looseness)
+
+Neutral (Regime = 0)
+All other conditions
+
+This avoids continuous overfitting and keeps the structure interpretable.
+
+4. Backtesting Framework
+
+Train/Test split:
+
+Train: Pre-2019
+
+Test: 2019 onward
+
+Signal = Regime
+
+Strategy return = Lagged signal × daily log return
+
+Transaction cost = 2 bps per signal change
+
+Performance metrics:
+
+Annualized Sharpe Ratio
+
+Maximum Drawdown
+
+Cumulative Return vs Market
+
+The strategy is evaluated strictly out-of-sample.
+
+Key Outputs
+
+Regime distribution statistics
+
+Train vs Test Sharpe ratio
+
+Max drawdown comparison
+
+Yearly forward return diagnostics by regime
+
+Strategy vs market cumulative return visualization
+
+Why This Matters
+
+This project demonstrates:
+
+Understanding of natural gas market structure
+
+Seasonality-adjusted fundamental modeling
+
+Regime-based thinking rather than curve fitting
+
+Proper out-of-sample validation
+
+Transaction cost awareness
+
+Risk-adjusted evaluation
+
+The goal is robustness and interpretability, not headline backtest numbers.
+
+Possible Extensions
+
+Dynamic thresholding
+
+Regime transition probability modeling
+
+Position sizing based on volatility targeting
+
+Incorporation of weather anomalies
+
+Multi-asset spread extension (HH vs JKM/TTF)
+
+Author
+
+Mohit Kumar
+Energy Quant Research | LNG & Gas Market Modeling
