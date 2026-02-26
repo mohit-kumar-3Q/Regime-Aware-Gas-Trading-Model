@@ -1,4 +1,4 @@
-# 🔥 Regime-Aware Systematic Natural Gas Trading Model
+# Regime-Aware Systematic Natural Gas Trading Model
 
 ## Overview
 
