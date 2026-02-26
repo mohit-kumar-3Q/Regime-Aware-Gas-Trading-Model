@@ -1,0 +1,4 @@
+Train Sharpe: 0.3012
+Test Sharpe: -0.1925
+Train Max Drawdown: -0.2975
+Test Max Drawdown: -0.7775
