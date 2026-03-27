@@ -39,7 +39,7 @@ This allows us to test whether structural stress environments produce persistent
 
 ## Data Used
 
-### 1. Henry Hub Daily Futures Prices
+### 1. Henry Hub Daily Futures Prices (Investing.com)
 
 Used to compute:
 
@@ -47,7 +47,7 @@ Used to compute:
 - Rolling volatility  
 - Forward returns  
 
-### 2. EIA Weekly Natural Gas Storage Data
+### 2. EIA Weekly Natural Gas Storage Data (EIA)
 
 Used to construct a seasonality-adjusted storage anomaly signal.
 
